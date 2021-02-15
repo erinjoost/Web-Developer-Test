@@ -5,9 +5,11 @@
   "engines": {
     "node": ">=10.15.3"
   },
-  "main": "server.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "grunt && node server.js",
+    "watch": "npx webpack --watch",
+    "start": "npx webpack serve --open",
+    "build": "npx webpack",
     "test": "test"
   },
   "repository": "git+https://github.com/erinjoost/Web-Developer-Test.git",
@@ -22,31 +24,24 @@
   },
   "homepage": "https://github.com/erinjoost/Web-Developer-Test#readme",
   "devDependencies": {
-    "@babel/cli": "^7.1.0",
-    "@babel/core": "^7.1.0",
-    "@babel/preset-env": "^7.1.0",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.2",
-    "css-loader": "^1.0.0",
+    "@babel/cli": "^7.12.16",
+    "@babel/core": "^7.12.16",
+    "@babel/preset-env": "^7.12.16",
+    "@babel/preset-react": "^7.12.13",
+    "babel-loader": "^8.2.2",
+    "copy-webpack-plugin": "^7.0.0",
+    "css-loader": "^5.0.2",
     "file-loader": "^6.2.0",
-    "grunt": "^1.0.4",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-jshint": "^2.1.0",
-    "grunt-contrib-uglify": "^4.0.1",
-    "grunt-contrib-watch": "^1.1.0",
-    "grunt-sass": "^3.0.2",
-    "http-server": "^0.12.3",
     "node-sass": "^4.14.1",
-    "style-loader": "^0.23.0",
-    "webpack": "^4.19.1",
-    "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.8"
+    "style-loader": "^2.0.0",
+    "webpack": "^5.22.0",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "express": "^4.17.1",
-    "react": "^16.5.2",
-    "react-dom": "^16.5.2",
-    "react-hot-loader": "^4.3.11",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-hot-loader": "^4.13.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0"
   }

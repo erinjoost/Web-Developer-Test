@@ -1,8 +1,10 @@
 const path = require("path");
 const webpack = require("webpack");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
     entry: ["./src/index.js"],
+    //template: require('./src/pages/index.html'),
     mode: "development",
     module: {
         rules: [{
@@ -21,8 +23,8 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"]
-            }
-        ]
+            }       
+        ],
     },
     resolve: {
         extensions: ["*", ".js", ".jsx"]
@@ -33,10 +35,12 @@ module.exports = {
         filename: "bundle.js"
     },
     devServer: {
+        historyApiFallback: true,
         contentBase: path.join(__dirname, "public/"),
         port: 3000,
-        publicPath: "http://localhost:3000/dist/",
         hotOnly: true
     },
-    plugins: [new webpack.HotModuleReplacementPlugin()]
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+    ]
 };
