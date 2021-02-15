@@ -10,6 +10,7 @@ import {hot} from "react-hot-loader";
 import "../styles/App.css";
 import Cart from "./Cart"
 import Main from "./Main"
+import {stockLevel} from "../utils/product"
 
 
 class App extends Component {
@@ -26,38 +27,27 @@ class App extends Component {
           "sku": "AWDT0001-M",
           "quantity":1
         },
+        {
+          "sku": "AWDT0003-M",
+          "quantity":5
+        }
       ]
     }
   }
-  incrementItemQuantity(item_sku){
-    let cart = this.state.cart.slice();
-    var item = cart.find(cartItem => {
-      return cartItem.sku === item_sku
-    })
-    if(!item){
-      cart.push({
-        sku:item_sku,
-        quantity:1
+
+  setItemQuantity(item_sku,new_quantity){
+    if(new_quantity===0){
+      this.removeItem(item_sku)
+    }else if(new_quantity > 0){
+      let cart = this.state.cart.slice();
+      var item = cart.find(cartItem => {
+        return cartItem.sku === item_sku;
       })
-    }else{
-      item.quantity += 1;
-    }
-    this.setState({cart:cart});
-  }
-  decrementItemQuantity(item_sku){
-    let cart = this.state.cart.slice();
-    var item = cart.find(cartItem => {
-      return cartItem.sku === item_sku;
-    })
-    if(item){
-      item.quantity -= 1;
-    }
-    if(item.quantity >= 0){
-      cart = this.removeItem(item_sku);
-    }else{
+      item.quantity = new_quantity;
       this.setState({cart:cart});
     }
   }
+
   removeItem(item_sku){
     let cart = this.state.cart.slice();
     var item = cart.find(cartItem => {
@@ -90,10 +80,8 @@ class App extends Component {
           </Route>
           <Route path="/cart">
             <Cart  cart={currentCart}
-              incrementItemQuantity={(item_sku) => this.incrementItemQuantity(item_sku)}
-              decrementItemQuantity={(item_sku) => this.decrementItemQuantity(item_sku)}
-             removeItem={(item_sku) => this.removeItem(item_sku)}
-
+              setItemQuantity={(item_sku, number) => this.setItemQuantity(item_sku,number)}
+              removeItem={(item_sku) => this.removeItem(item_sku)}
             />
           </Route>
         </Switch>

@@ -3,16 +3,18 @@ import {hot} from "react-hot-loader";
 import CartItem from "./CartItem";
 import {price} from "../utils/product";
 class Cart extends Component{
-  getTotal(){
+  getCartTotal(){
     //returns cart total in double to two decimal places
     let total = 0;
     this.props.cart.map(cartItem => {
       total += cartItem.quantity * price(cartItem.sku);
     });
-    return total.toFixed(2); 
+    return total; 
   }
   render(){
-    const total = this.getTotal();
+    const subtotal = this.getCartTotal();
+    const vat = (subtotal * 0.2);
+    const total = subtotal+vat;
     const buyNow = total>0?
     <button className="buyNow"> Buy Now </button>:
       "";
@@ -20,20 +22,22 @@ class Cart extends Component{
 
     return(
       <div className="Cart">
-        <h1> Your Cart </h1>
+        <h1>Your Basket</h1>
+        <p>Items you have added to your basket are shown below. Adjust the quantities or remove items before continuing purchase.</p>
         <ul className="cart-items">
           {this.props.cart.map(cartItem => (
             <li key={cartItem.sku}>
             <CartItem key={cartItem.sku} sku={cartItem.sku} quantity={cartItem.quantity}
-              incrementItemQuantity={()=>this.props.incrementItemQuantity(cartItem.sku)}
-              decrementItemQuantity={()=>this.props.decrementItemQuantity(cartItem.sku)}
+              setItemQuantity={this.props.setItemQuantity}
               removeItem={()=>this.props.removeItem(cartItem.sku)}
               />
             </li>
           ))}
         </ul>
-       Total:{total}
-       {buyNow}
+      SubTotal{subtotal.toFixed(2)}
+      VAT at 20%:{vat.toFixed(2)}
+      Total:{total.toFixed(2)}
+      {buyNow}
       </div>
     );
   }
