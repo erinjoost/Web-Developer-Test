@@ -60,3 +60,6 @@ typings/
 # Output directory
 /public
 
+.terraform/
+.tfstate
+*.tfvars
