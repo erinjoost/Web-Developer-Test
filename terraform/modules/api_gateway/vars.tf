@@ -1,0 +1,10 @@
+variable api_name {}
+variable lambda_invoke_arn {}
+variable lambda_function_name {}
+variable environment {}
+variable tag {}
+variable api_stage_name {}
+variable api_gw_alias {}
+variable cdn_alias {}
+variable acm_arn {}
+variable prod_domain_name {}
