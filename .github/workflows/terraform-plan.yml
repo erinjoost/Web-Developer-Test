@@ -7,11 +7,10 @@ on:
     branches:
       - master
       - develop
-      
+
 jobs:
   apply:
     name: "Configure"
-    if: github.event.pull_request.merged
     runs-on: ubuntu-latest
     defaults:
       run:
