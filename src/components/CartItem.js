@@ -42,21 +42,46 @@ class CartItem extends Component{
             item.size = "one size";
         }
         const cost = (price(sku) * this.props.quantity).toFixed(2);
-        return(
-        <div className="item grid">
-            <div className="product">{item.name}, {item.size}</div>
-            <div className="price">${price(this.props.sku)}</div>
-            <div className="container quantity">     
-                <button onClick={this.decrementItemQuantity}>-</button>
-                <input type="number" value={this.state.quantity} onChange={this.handleChangeItemQuantity} />
-                <button onClick={this.incrementItemQuantity}>+</button>
-            </div>
-            <div className="cost">${cost} </div>       
-            <button className="removeItem" onClick={this.props.removeItem}><img src={trashcan} alt="remove item"/></button>
-        </div>
-        );
+        if(!this.props.isMobile){
+            return(
+                <div className="item grid">
+                    <div className="product">{item.name}, {item.size}</div>
+                    <div className="price">${price(this.props.sku)}</div>
+                    <div className="container quantity">     
+                        <button onClick={this.decrementItemQuantity}>-</button>
+                        <input type="number" value={this.state.quantity} onChange={this.handleChangeItemQuantity} />
+                        <button onClick={this.incrementItemQuantity}>+</button>
+                    </div>
+                    <div className="cost">${cost} </div>       
+                    <button className="removeItem" onClick={this.props.removeItem}><img src={trashcan} alt="remove item"/></button>
+                </div>
+            );
+        }else{
+            return(
+                <div className="item">
+                    <div className="product">{item.name}, {item.size}</div>
+                    <hr/>
+                    <div className="grid">
+                        <label>Price</label>
+                        <div className="price">${price(this.props.sku)}</div>
+                        <label>Quantity</label>
+                        <div className="container quantity">     
+                            <button onClick={this.decrementItemQuantity}>-</button>
+                            <input type="number" value={this.state.quantity} onChange={this.handleChangeItemQuantity} />
+                            <button onClick={this.incrementItemQuantity}>+</button>
+                        </div>
+                        <label className="cost">Cost</label>
+                        <div className="cost">${cost} </div>
+                        <label>Remove</label>       
+                        <button className="removeItem" onClick={this.props.removeItem}><img src={trashcan} alt="remove item"/></button>
+                    </div>
+                </div>
+            );
+        }
+       
     }
 } 
+
 
 function validQuantity(new_quantity, item_sku){
     if(new_quantity>stockLevel(item_sku) || new_quantity < 0){
