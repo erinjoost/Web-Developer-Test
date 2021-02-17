@@ -51,6 +51,10 @@ class Cart extends Component{
             <div className="label">Total:</div>
             <div className="cost">${total.toFixed(2)}</div>
           </div>
+          <hr className="spacer"/>
+          <div className="grid total">
+            <button className="cost buynow">Buy Now</button>
+          </div>
         </div>
       </div>
     );
