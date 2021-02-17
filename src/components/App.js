@@ -15,11 +15,9 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.handleResize = this.handleResize.bind(this);
-    
-    this.state = {
-      windowWidth: window.innerWidth,
-      total:0,
-      cart: [
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    if(!cart){
+      cart = [
         {
           "sku": "AWDT0001-S",
           "quantity": 1
@@ -38,31 +36,20 @@ class App extends Component {
         },
       ]
     }
-  }
 
-  setItemQuantity(item_sku, new_quantity) {
-    if (new_quantity >= 0) {
-      let cart = this.state.cart.slice();
-      var item = cart.find(cartItem => {
-        return cartItem.sku === item_sku;
-      })
-      item.quantity = new_quantity;
-      this.setState({ cart: cart });
+    this.state = {
+      windowWidth: window.innerWidth,
+      total:0,
+      cart: cart,
     }
   }
 
-  removeItem(item_sku) {
-    let cart = this.state.cart.slice();
-    var item = cart.find(cartItem => {
-      return cartItem.sku === item_sku;
-    });
-    var index = cart.indexOf(item);
-    console.log(index)
-    if (index > -1) {
-      cart.splice(index, 1);
-    }
+  updateCart(cart){
+    localStorage.setItem('cart', JSON.stringify(cart));
     this.setState({ cart: cart });
   }
+
+
   handleResize(e){
     this.setState({ windowWidth: window.innerWidth });
   }
@@ -97,8 +84,7 @@ class App extends Component {
             <Route path="/cart">
               <Cart cart={currentCart}
                 isMobile={isMobile}
-                setItemQuantity={(item_sku, number) => this.setItemQuantity(item_sku, number)}
-                removeItem={(item_sku) => this.removeItem(item_sku)}
+                updateCart={(cart) => this.updateCart(cart)}
               />
             </Route>
           </Switch>

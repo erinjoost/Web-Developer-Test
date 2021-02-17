@@ -12,7 +12,7 @@ function TotalBar(props) {
   const buyNow = total > 0 ?
     <button className="cost buynow"> Buy Now </button> :
     <button className="cost buynow inactive"> Buy Now </button>;
-  if(props.isMobile){
+  if (props.isMobile) {
     return (
       <div className="total container">
         <div className="grid">
@@ -22,7 +22,7 @@ function TotalBar(props) {
           <div className="cost">${vat.toFixed(2)}</div>
           <label>Total:</label>
           <div className="cost">${total.toFixed(2)}</div>
-          
+
         </div>
         {buyNow}
       </div>
@@ -52,8 +52,8 @@ function TotalBar(props) {
 }
 
 function CartTableLabels(props) {
-  if(props.isMobile){
-    return <div/> ;
+  if (props.isMobile) {
+    return <div />;
   }
   return (
     <div className="grid item header">
@@ -65,6 +65,11 @@ function CartTableLabels(props) {
   )
 }
 class Cart extends Component {
+  constructor(props) {
+    super(props);
+    this.setItemQuantity = this.setItemQuantity.bind(this);
+    this.removeItem = this.removeItem.bind(this);
+  }
   getCartTotal() {
     //returns cart total in double to two decimal places
     let total = 0;
@@ -72,6 +77,30 @@ class Cart extends Component {
       total += cartItem.quantity * price(cartItem.sku);
     });
     return total;
+  }
+
+  setItemQuantity(item_sku, new_quantity) {
+    if (new_quantity >= 0) {
+      let cart = this.props.cart.slice();
+      var item = cart.find(cartItem => {
+        return cartItem.sku === item_sku;
+      })
+      item.quantity = new_quantity;
+      this.props.updateCart(cart)
+    }
+  }
+
+  removeItem(item_sku) {
+    let cart = this.props.cart.slice();
+    var item = cart.find(cartItem => {
+      return cartItem.sku === item_sku;
+    });
+    var index = cart.indexOf(item);
+    console.log(index)
+    if (index > -1) {
+      cart.splice(index, 1);
+    }
+    this.props.updateCart(cart)
   }
   render() {
     const subtotal = this.getCartTotal();
@@ -84,16 +113,16 @@ class Cart extends Component {
           <p>Items you have added to your basket are shown below. Adjust the quantities or remove items before continuing purchase.</p>
         </div>
         <div className="cart">
-          <CartTableLabels isMobile={isMobile}/>
+          <CartTableLabels isMobile={isMobile} />
           {!isMobile && <hr />}
           {this.props.cart.map(cartItem => (
             <CartItem isMobile={isMobile} key={cartItem.sku} sku={cartItem.sku} quantity={cartItem.quantity}
-              setItemQuantity={this.props.setItemQuantity}
-              removeItem={() => this.props.removeItem(cartItem.sku)}
+              setItemQuantity={this.setItemQuantity}
+              removeItem={() => this.removeItem(cartItem.sku)}
             />
           ))}
           <hr className="spacer" />
-          <TotalBar subtotal={subtotal} isMobile={isMobile}/>
+          <TotalBar subtotal={subtotal} isMobile={isMobile} />
         </div>
       </div>
     );

@@ -18,7 +18,7 @@ class CartItem extends Component{
        this.setQuantity(current+1)
     }
     decrementItemQuantity(){
-        let current = parseInt(this.state.quantity);
+        let current = parseInt(this.props.quantity);
         this.setQuantity(current-1);
     }
     setQuantity(new_quantity){

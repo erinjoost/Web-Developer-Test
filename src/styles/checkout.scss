@@ -10,10 +10,9 @@ $breakpoint:768px;
     .heading {
         padding: 20px 5px;
     }
+
     .cart {
         .item {
-            
-
             .product {
                 justify-self: left;
             }
@@ -48,8 +47,6 @@ $breakpoint:768px;
             }
         }
 
-
-
         .buynow {
             display: block;
             justify-self: right;
@@ -60,6 +57,7 @@ $breakpoint:768px;
             border-radius: 4px;
             text-align: center;
             padding: 0px;
+
             .inactive {
                 background-color: gray;
             }
@@ -81,8 +79,8 @@ $breakpoint:768px;
                 justify-content: stretch;
                 grid-template-columns: 1.5fr 1fr 1fr 1fr 40px;
                 align-items: center;
-                padding:10px;
-                gap:20px;
+                padding: 10px;
+                gap: 20px;
 
             }
 
@@ -124,7 +122,7 @@ $breakpoint:768px;
                 justify-items: right;
             }
 
-            .item{
+            .item {
                 margin: 20px 0px;
             }
 
@@ -136,17 +134,20 @@ $breakpoint:768px;
                 grid-column: 1 / 2;
                 border-bottom: black;
                 border-width: 1px;
+                margin:8px 4px;
             }
 
             .total {
-                margin:inherit;
+                margin: inherit;
                 flex-direction: column;
+
                 .grid {
                     display: grid;
                     justify-content: stretch;
                     padding: 10px;
                 }
-                .buynow{
+
+                .buynow {
                     align-self: flex-end;
                     margin: 30px 10px;
                 }
