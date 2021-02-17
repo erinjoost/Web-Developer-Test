@@ -21,23 +21,37 @@ class Cart extends Component{
     
 
     return(
-      <div className="Cart">
+      <div className="checkout">
         <h1>Your Basket</h1>
         <p>Items you have added to your basket are shown below. Adjust the quantities or remove items before continuing purchase.</p>
-        <ul className="cart-items">
+        <div className="cart">
+          <div className="grid item header">
+            <div className="product">Product</div>
+            <div>Price</div>
+            <div>Quantity</div>
+            <div>Cost</div>
+          </div>
+          <hr/>
           {this.props.cart.map(cartItem => (
-            <li key={cartItem.sku}>
             <CartItem key={cartItem.sku} sku={cartItem.sku} quantity={cartItem.quantity}
               setItemQuantity={this.props.setItemQuantity}
               removeItem={()=>this.props.removeItem(cartItem.sku)}
               />
-            </li>
           ))}
-        </ul>
-      SubTotal{subtotal.toFixed(2)}
-      VAT at 20%:{vat.toFixed(2)}
-      Total:{total.toFixed(2)}
-      {buyNow}
+          <hr className="spacer"/>
+          <div className="grid total">
+            <div className="label">SubTotal:</div>
+            <div className="cost">${subtotal.toFixed(2)}</div>
+          </div>
+          <div className="grid total">
+            <div className="label">VAT at 20%:</div>
+            <div className="cost">${vat.toFixed(2)}</div>
+          </div>
+          <div className="grid total">
+            <div className="label">Total:</div>
+            <div className="cost">${total.toFixed(2)}</div>
+          </div>
+        </div>
       </div>
     );
   }

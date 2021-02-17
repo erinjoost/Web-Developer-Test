@@ -1,7 +1,6 @@
 import React, { Component} from "react";
 import {hot} from "react-hot-loader";
 import {price, productListing, stockLevel} from "../utils/product";
-
 class CartItem extends Component{
     constructor(props){
         super(props);
@@ -37,14 +36,21 @@ class CartItem extends Component{
     render(){
         const sku = this.props.sku;
         const item = productListing(sku);
-        const cost = price(sku) * this.props.quantity;
+        if(!item.size){
+            item.size = "one size";
+        }
+        const cost = (price(sku) * this.props.quantity).toFixed(2);
         return(
-        <div>{item.name}      {item.size} 
-            <button className="dec"  onClick={this.decrementItemQuantity}> - </button>
-            <input type="number" value={this.state.quantity} onChange={this.handleChangeItemQuantity} />
-            <button className="inc" onClick={this.incrementItemQuantity}> + </button>
-            x{price(this.props.sku)} ..... {cost}
-            <button className="removeItem" onClick={this.props.removeItem}> X </button>
+        <div className="item grid">
+            <div className="product">{item.name}, {item.size}</div>
+            <div className="price">${price(this.props.sku)}</div>
+            <div className="container quantity">     
+                <button onClick={this.decrementItemQuantity}>-</button>
+                <input type="number" value={this.state.quantity} onChange={this.handleChangeItemQuantity} />
+                <button onClick={this.incrementItemQuantity}>+</button>
+            </div>
+            <div className="cost">${cost} </div>       
+            <button className="removeItem" onClick={this.props.removeItem}/>
         </div>
         );
     }

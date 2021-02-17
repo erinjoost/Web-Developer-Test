@@ -21,9 +21,13 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
-            }       
+                test: /\.s[ac]ss$/i,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader",
+                ],
+            },
         ],
     },
     resolve: {
@@ -38,7 +42,7 @@ module.exports = {
         historyApiFallback: true,
         contentBase: path.join(__dirname, "public/"),
         port: 3000,
-        hotOnly: true
+        hot: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),

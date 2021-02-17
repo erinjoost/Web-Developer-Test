@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100&display=swap');
+.App {
+    margin: 1rem;
+    font-family: 'Libre Franklin', sans-serif;
+    display: block;
+}
+
+ul {
+    list-style-type: none;
+    width: 100%;
+}
+
+.product {
+    text-align: left;
+}
+
+li {
+    width: 100%;
+}
+
+.checkout {
+    max-width: 60%;
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: small;
+    padding: 10px;
+    margin:auto;
+}
+
+.cart{
+    margin-top:20px;
+}
+
+button {
+    background-color: Transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    display: inline-block;
+    padding: 0px;
+    color: inherit;
+}
+
+input {
+    width: 30px;
+    text-align: center;
+    border: none;
+    background-color: Transparent;
+    outline: none;
+}
+
+.removeItem {
+    background-image: url('../assets/trashcan.png');
+}
+
+.container {
+    display: flex;
+}
+
+.grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    display: grid;
+    align-items: center;
+    grid-template-columns: [start] 40% [quantity] 15% [price] auto [cost] 10% [remove] 5% [end];
+    justify-content: stretch;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.quantity {
+    width: 70px;
+    height: 25px;
+    color: cornflowerblue;
+    background-color: white;
+    justify-content: center;
+    border-style: solid;
+    border-width: thin;
+    border-radius: 3px;
+}
+
+.item {
+    padding: 10px;
+    display: grid;
+    justify-items: center;
+}
+
+.price, .cost{
+    text-align: right;
+}
+
+hr {
+    border: none;
+    height: 0.5px;
+    background-color:lightgrey; 
+}
+
+.total{
+    padding: 10px;
+    display: grid;
+    gap:5px;
+    justify-content: stretch;
+    grid-template-areas: "label . . cost . ";
+}
+
+
+
+.product {
+   justify-self: left;
+}
+
+
+.total .cost{
+    grid-area: cost;
+}
+
+.total .label{
+    grid-area: label;
+}
+
+.spacer{
+    height:0px;
+}
+

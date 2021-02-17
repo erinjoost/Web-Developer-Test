@@ -7,11 +7,8 @@ import {
 } from "react-router-dom";
 import {hot} from "react-hot-loader";
 
-import "../styles/App.css";
 import Cart from "./Cart"
 import Main from "./Main"
-import {stockLevel} from "../utils/product"
-
 
 class App extends Component {
 
@@ -30,15 +27,16 @@ class App extends Component {
         {
           "sku": "AWDT0003-M",
           "quantity":5
-        }
+        },
+        { "sku": "AWDT0002",
+          "quantity":3
+        },
       ]
     }
   }
 
   setItemQuantity(item_sku,new_quantity){
-    if(new_quantity===0){
-      this.removeItem(item_sku)
-    }else if(new_quantity > 0){
+     if(new_quantity >= 0){
       let cart = this.state.cart.slice();
       var item = cart.find(cartItem => {
         return cartItem.sku === item_sku;
