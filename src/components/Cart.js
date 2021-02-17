@@ -29,7 +29,7 @@ class Cart extends Component{
             <div className="product">Product</div>
             <div>Price</div>
             <div>Quantity</div>
-            <div>Cost</div>
+            <div className="cost">Cost</div>
           </div>
           <hr/>
           {this.props.cart.map(cartItem => (

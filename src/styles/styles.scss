@@ -50,19 +50,14 @@ input {
     outline: none;
 }
 
-.removeItem {
-    background-image: url('../assets/trashcan.png');
-}
-
 .container {
     display: flex;
 }
 
 .grid {
-    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr 30px;
     display: grid;
     align-items: center;
-    grid-template-columns: [start] 40% [quantity] 15% [price] auto [cost] 10% [remove] 5% [end];
     justify-content: stretch;
 }
 
@@ -93,10 +88,6 @@ input[type=number] {
     justify-items: center;
 }
 
-.price, .cost{
-    text-align: right;
-}
-
 hr {
     border: none;
     height: 0.5px;
@@ -106,7 +97,6 @@ hr {
 .total{
     padding: 10px;
     display: grid;
-    gap:5px;
     justify-content: stretch;
     grid-template-areas: "label . . cost . ";
 }
@@ -117,6 +107,10 @@ hr {
    justify-self: left;
 }
 
+.cost {
+    justify-self:right;
+    padding-right:10px;
+}
 
 .total .cost{
     grid-area: cost;
@@ -133,10 +127,12 @@ hr {
 }
 
 .buynow{
+    justify-self: right;
+    width:75px;
+    height:30px;
     background-color:cornflowerblue;
     color:white;
     text-emphasis: bold;
-    text-align: center;
     padding:10px;
     border-radius: 4px;
 }

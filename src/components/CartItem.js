@@ -1,6 +1,8 @@
 import React, { Component} from "react";
 import {hot} from "react-hot-loader";
 import {price, productListing, stockLevel} from "../utils/product";
+import trashcan from '../assets/images/trashcan.png'
+
 class CartItem extends Component{
     constructor(props){
         super(props);
@@ -50,7 +52,7 @@ class CartItem extends Component{
                 <button onClick={this.incrementItemQuantity}>+</button>
             </div>
             <div className="cost">${cost} </div>       
-            <button className="removeItem" onClick={this.props.removeItem}/>
+            <button className="removeItem" onClick={this.props.removeItem}><img src={trashcan} alt="remove item"/></button>
         </div>
         );
     }
