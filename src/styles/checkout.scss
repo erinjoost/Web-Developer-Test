@@ -1,17 +1,21 @@
 $breakpoint:768px;
 
-
 .checkout {
     font-family: 'Libre Franklin', sans-serif;
     font-size: small;
     padding: 10px;
-    margin: 30px auto 50px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
 
     .heading {
         padding: 20px 5px;
     }
 
     .cart {
+        display: flex;
+        flex-direction: column;
         .item {
             .product {
                 justify-self: left;
@@ -48,6 +52,8 @@ $breakpoint:768px;
         }
 
         .buynow {
+            align-self: flex-end;
+            grid-area: cost;
             display: block;
             justify-self: right;
             width: 75px;
@@ -72,32 +78,30 @@ $breakpoint:768px;
     .checkout {
         max-width: 650px;
         width: 60%;
-
+       
+        .buynow{
+            margin:30px 60px;
+        }
         .cart {
+            .cost {
+                justify-self: right;
+            }
             .grid {
-                justify-items: center;
                 justify-content: stretch;
+                grid-template-areas: "label . . cost . ";
+                justify-items: center;
                 grid-template-columns: 1.5fr 1fr 1fr 1fr 40px;
                 align-items: center;
                 padding: 10px;
                 gap: 20px;
-
-            }
-
-            .cost {
-                justify-self: right;
+    
             }
 
             .total {
                 .grid {
-                    display: grid;
-                    justify-content: stretch;
-                    grid-template-areas: "label . . cost . ";
-
                     .cost {
                         grid-area: cost;
                     }
-
                     .label {
                         justify-self: left;
                         grid-area: label;
@@ -109,21 +113,20 @@ $breakpoint:768px;
 }
 
 @media (max-width: 767px) {
-
     //mobile
     .checkout {
         width: 70%;
-
+        .grid {
+            padding: 10px;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            justify-items: right;
+            justify-content: stretch;
+            padding: 10px
+        }
         .cart {
-            .grid {
-                padding: 10px;
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 1fr 1fr 1fr;
-                justify-items: right;
-            }
-
             .item {
-                margin: 20px 0px;
+                margin: 1em 0px;
             }
 
             label {
@@ -140,18 +143,11 @@ $breakpoint:768px;
             .total {
                 margin: inherit;
                 flex-direction: column;
-
-                .grid {
-                    display: grid;
-                    justify-content: stretch;
-                    padding: 10px;
-                }
-
-                .buynow {
-                    align-self: flex-end;
-                    margin: 30px 10px;
-                }
             }
+        }
+        .buynow {
+            align-self: flex-end;
+            margin: 2em 10px;
         }
     }
 }

@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import { hot } from "react-hot-loader";
 
+import NavBar from "./NavBar"
 import Cart from "./Cart"
 import Main from "./Main"
 
@@ -16,7 +16,7 @@ class App extends Component {
     super(props)
     this.handleResize = this.handleResize.bind(this);
     let cart = JSON.parse(localStorage.getItem('cart'));
-    if(!cart){
+    if (!cart) {
       cart = [
         {
           "sku": "AWDT0001-S",
@@ -39,44 +39,36 @@ class App extends Component {
 
     this.state = {
       windowWidth: window.innerWidth,
-      total:0,
+      total: 0,
       cart: cart,
     }
   }
 
-  updateCart(cart){
+  updateCart(cart) {
     localStorage.setItem('cart', JSON.stringify(cart));
     this.setState({ cart: cart });
   }
 
 
-  handleResize(e){
+  handleResize(e) {
     this.setState({ windowWidth: window.innerWidth });
   }
 
- componentDidMount() {
-  window.addEventListener("resize", this.handleResize);
- }
+  componentDidMount() {
+    window.addEventListener("resize", this.handleResize);
+  }
 
- componentWillUnMount() {
-  window.addEventListener("resize", this.handleResize);
- } 
+  componentWillUnMount() {
+    window.addEventListener("resize", this.handleResize);
+  }
 
   render() {
     const currentCart = this.state.cart;
     const isMobile = (this.state.windowWidth < 768);
     return (
       <Router>
-        <div>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/cart">Cart</Link>
-            </li>
-          </ul>
-          <hr />
+        <div className="App">
+          <NavBar />
           <Switch>
             <Route exact path="/">
               <Main />

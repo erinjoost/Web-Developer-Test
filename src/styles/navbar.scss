@@ -1,0 +1,33 @@
+.navbar {
+    font-family: 'Libre Franklin', sans-serif;
+    font-size:small;
+    overflow: hidden;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    padding:10px;
+	border-bottom: 1px solid lightgrey;
+	box-shadow: 0 10px 10px -10px lightgrey;
+    h2 {
+        margin:1em;
+        display: inline-flex;
+        align-items: inherit;
+
+    }
+    .menu{
+        display:inline-flex;
+        justify-content: flex-end;
+        align-items: inherit;
+    }
+    li{
+        a{
+            padding:1em;
+            border-radius: 4px;
+            display: flex;
+            align-content: center;
+        }
+        :hover{
+            background-color: lightgrey;
+        }
+    }
+}

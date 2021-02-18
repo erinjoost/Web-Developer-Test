@@ -4,66 +4,6 @@ import CartItem from "./CartItem";
 import { price } from "../utils/product";
 
 import "../styles/checkout.scss";
-
-function TotalBar(props) {
-  const subtotal = parseFloat(props.subtotal);
-  const vat = (subtotal * 0.2);
-  const total = subtotal + vat;
-  const buyNow = total > 0 ?
-    <button className="cost buynow"> Buy Now </button> :
-    <button className="cost buynow inactive"> Buy Now </button>;
-  if (props.isMobile) {
-    return (
-      <div className="total container">
-        <div className="grid">
-          <label>SubTotal:</label>
-          <div className="cost">${subtotal.toFixed(2)}</div>
-          <label>VAT at 20%:</label>
-          <div className="cost">${vat.toFixed(2)}</div>
-          <label>Total:</label>
-          <div className="cost">${total.toFixed(2)}</div>
-
-        </div>
-        {buyNow}
-      </div>
-    );
-  } else {
-    return (
-      <div className="total">
-        <div className="grid">
-          <div className="label">SubTotal:</div>
-          <div className="cost">${subtotal.toFixed(2)}</div>
-        </div>
-        <div className="grid">
-          <div className="label">VAT at 20%:</div>
-          <div className="cost">${vat.toFixed(2)}</div>
-        </div>
-        <div className="grid">
-          <div className="label">Total:</div>
-          <div className="cost">${total.toFixed(2)}</div>
-        </div>
-        <hr className="spacer" />
-        <div className="grid">
-          {buyNow}
-        </div>
-      </div>
-    )
-  }
-}
-
-function CartTableLabels(props) {
-  if (props.isMobile) {
-    return <div />;
-  }
-  return (
-    <div className="grid item header">
-      <div className="product">Product</div>
-      <div>Price</div>
-      <div>Quantity</div>
-      <div className="cost">Cost</div>
-    </div>
-  )
-}
 class Cart extends Component {
   constructor(props) {
     super(props);
@@ -105,7 +45,9 @@ class Cart extends Component {
   render() {
     const subtotal = this.getCartTotal();
     const isMobile = this.props.isMobile;
-
+    const buyNow = subtotal > 0 ?
+    <button className="buynow"> Buy Now </button> :
+    <button className="buynow inactive"> Buy Now </button>;
     return (
       <div className="checkout">
         <div className="heading">
@@ -121,12 +63,63 @@ class Cart extends Component {
               removeItem={() => this.removeItem(cartItem.sku)}
             />
           ))}
-          <hr className="spacer" />
           <TotalBar subtotal={subtotal} isMobile={isMobile} />
+          {buyNow}
         </div>
       </div>
     );
   }
 }
+function TotalBar(props) {
+  const subtotal = parseFloat(props.subtotal);
+  const vat = (subtotal * 0.2);
+  const total = subtotal + vat;
+ 
+  if (props.isMobile) {
+    return (
+      <div className="total container">
+        <div className="grid">
+          <label>SubTotal:</label>
+          <div className="cost">${subtotal.toFixed(2)}</div>
+          <label>VAT at 20%:</label>
+          <div className="cost">${vat.toFixed(2)}</div>
+          <label>Total:</label>
+          <div className="cost">${total.toFixed(2)}</div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="total">
+        <div className="grid">
+          <div className="label">SubTotal:</div>
+          <div className="cost">${subtotal.toFixed(2)}</div>
+        </div>
+        <div className="grid">
+          <div className="label">VAT at 20%:</div>
+          <div className="cost">${vat.toFixed(2)}</div>
+        </div>
+        <div className="grid">
+          <div className="label">Total:</div>
+          <div className="cost">${total.toFixed(2)}</div>
+        </div>
+        
+      </div>
+    )
+  }
+}
 
+function CartTableLabels(props) {
+  if (props.isMobile) {
+    return <div />;
+  }
+  return (
+    <div className="grid item header">
+      <div className="product">Product</div>
+      <div>Price</div>
+      <div>Quantity</div>
+      <div className="cost">Cost</div>
+    </div>
+  )
+}
 export default hot(module)(Cart);
