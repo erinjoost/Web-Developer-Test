@@ -9,6 +9,8 @@ import { hot } from "react-hot-loader";
 import NavBar from "./NavBar"
 import Cart from "./Cart"
 import Main from "./Main"
+import Footer from "./Footer"
+import "../styles/app.scss"
 
 class App extends Component {
 
@@ -67,8 +69,8 @@ class App extends Component {
     const isMobile = (this.state.windowWidth < 768);
     return (
       <Router>
-        <div className="App">
-          <NavBar />
+        <NavBar id="top" />
+        <div className="content">
           <Switch>
             <Route exact path="/">
               <Main />
@@ -81,6 +83,7 @@ class App extends Component {
             </Route>
           </Switch>
         </div>
+        <Footer/>
       </Router>
     );
   }

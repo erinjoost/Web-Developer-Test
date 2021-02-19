@@ -8,8 +8,9 @@ $breakpoint:768px;
     flex-direction: column;
     justify-content: center;
     align-self: center;
+    margin:auto;
 
-    .heading {
+    header {
         padding: 20px 5px;
     }
 
@@ -56,13 +57,6 @@ $breakpoint:768px;
             grid-area: cost;
             display: block;
             justify-self: right;
-            width: 75px;
-            height: 30px;
-            background-color: dodgerblue;
-            color: white;
-            border-radius: 4px;
-            text-align: center;
-            padding: 0px;
 
             .inactive {
                 background-color: gray;
@@ -78,7 +72,6 @@ $breakpoint:768px;
     .checkout {
         max-width: 650px;
         width: 60%;
-       
         .buynow{
             margin:30px 60px;
         }

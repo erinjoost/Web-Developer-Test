@@ -1,0 +1,49 @@
+$bottom-padding:40px;
+footer{
+    height: 100px;
+    .container{
+        justify-content: space-between;
+    }
+    .navbar{
+        display: inline-flex;
+        a{
+            img{
+                display: none;
+            }
+        }
+    }
+    h2 {
+        padding:$bottom-padding;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .menu {
+        padding:40px;
+    }
+    li{
+        padding:10px;
+    }
+
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
+    width: 100%;
+    height:100px;
+    p {
+        margin:10px;
+        text-align: right;
+    }
+    
+}
+
+#info{
+    flex-direction: column;
+    padding:$bottom-padding;
+    justify-content: center;
+    align-items: right;
+    img{
+        height: 20px;
+        margin:10px;
+    }
+}

@@ -1,10 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@100&display=swap');
 
-.App {
+* {
+    margin: 0px;
+    padding:0px;
+}
+
+#root{
     font-family: 'Libre Franklin', sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    display:block;
+}
+
+.content {
+    padding-top:80px;
+    font-family: 'Libre Franklin', sans-serif;
+    display: block;
 }
 
 ul {
@@ -26,9 +35,25 @@ button {
     display: inline-block;
     padding: 0px;
     color: inherit;
+    
+}
+.blue{
+    width: 90px;
+    height: 30px;
+    background-color: dodgerblue;
+    color: white;
+    border-radius: 4px;
+    text-align: center;
+    padding: 0px;
 }
 .container {
     display: flex;
+    flex-wrap: wrap;
+}
+
+.column{
+    flex-direction: column;
+    
 }
 
 hr {

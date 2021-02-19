@@ -46,16 +46,16 @@ class Cart extends Component {
     const subtotal = this.getCartTotal();
     const isMobile = this.props.isMobile;
     const buyNow = subtotal > 0 ?
-    <button className="buynow"> Buy Now </button> :
-    <button className="buynow inactive"> Buy Now </button>;
+    <button className="blue buynow"> Buy Now </button> :
+    <button className="blue buynow inactive"> Buy Now </button>;
     return (
       <div className="checkout">
-        <div className="heading">
-          <h1>Your Basket</h1>
-          <p>Items you have added to your basket are shown below. Adjust the quantities or remove items before continuing purchase.</p>
-        </div>
-        <div className="cart">
-          <CartTableLabels isMobile={isMobile} />
+        <header>
+          <h2>Your Basket</h2>
+          <span>Items you have added to your basket are shown below. Adjust the quantities or remove items before continuing purchase.</span>
+        </header>
+        <ul className="cart">
+          <CartLabels isMobile={isMobile} />
           {!isMobile && <hr />}
           {this.props.cart.map(cartItem => (
             <CartItem isMobile={isMobile} key={cartItem.sku} sku={cartItem.sku} quantity={cartItem.quantity}
@@ -65,7 +65,7 @@ class Cart extends Component {
           ))}
           <TotalBar subtotal={subtotal} isMobile={isMobile} />
           {buyNow}
-        </div>
+        </ul>
       </div>
     );
   }
@@ -77,7 +77,7 @@ function TotalBar(props) {
  
   if (props.isMobile) {
     return (
-      <div className="total container">
+      <div id="cartLabels" className="total container">
         <div className="grid">
           <label>SubTotal:</label>
           <div className="cost">${subtotal.toFixed(2)}</div>
@@ -90,7 +90,7 @@ function TotalBar(props) {
     );
   } else {
     return (
-      <div className="total">
+      <div id="cartLabels" className="total">
         <div className="grid">
           <div className="label">SubTotal:</div>
           <div className="cost">${subtotal.toFixed(2)}</div>
@@ -109,7 +109,7 @@ function TotalBar(props) {
   }
 }
 
-function CartTableLabels(props) {
+function CartLabels(props) {
   if (props.isMobile) {
     return <div />;
   }

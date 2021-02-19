@@ -44,7 +44,7 @@ class CartItem extends Component{
         const cost = (price(sku) * this.props.quantity).toFixed(2);
         if(!this.props.isMobile){
             return(
-                <div className="item grid">
+                <li className="item grid">
                     <div className="product">{item.name}, {item.size}</div>
                     <div className="price">${price(this.props.sku)}</div>
                     <div className="container quantity">     
@@ -54,7 +54,7 @@ class CartItem extends Component{
                     </div>
                     <div className="cost">${cost} </div>       
                     <button className="removeItem" onClick={this.props.removeItem}><img src={trashcan} alt="remove item"/></button>
-                </div>
+                </li>
             );
         }else{
             return(

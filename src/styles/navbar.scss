@@ -1,13 +1,22 @@
-.navbar {
-    font-family: 'Libre Franklin', sans-serif;
+#top.navbar {
+    background-color: white;
+    position: fixed;
+    top: 0;
+    height:80px;
+    width: 100%;
     font-size:small;
     overflow: hidden;
     display:flex;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: auto;
     justify-content: space-between;
     align-items: center;
-    padding:10px;
 	border-bottom: 1px solid lightgrey;
 	box-shadow: 0 10px 10px -10px lightgrey;
+    #yourcart{
+        display: none;
+    }
     h2 {
         margin:1em;
         display: inline-flex;

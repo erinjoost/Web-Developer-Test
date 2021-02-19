@@ -9,8 +9,8 @@ import cart from '../assets/images/cart.png'
 class NavBar extends Component{
   render(){
     return(
-      <div className="navbar">
-        <h2>APPS</h2>
+      <div id={this.props.id} className="navbar">
+        <h2><Link to="/">APP</Link></h2>
          <ul className="menu">
             <li>
               <Link to="/">Products</Link>
@@ -22,7 +22,7 @@ class NavBar extends Component{
               <Link to="/">Content</Link>
             </li>
             <li>
-              <Link to="/cart"><img src={cart} alt="remove item"/></Link>
+              <Link to="/cart"><img src={cart} alt="cart icon"/><div id="yourcart">Your Cart</div></Link>
             </li>
           </ul>
       </div>
