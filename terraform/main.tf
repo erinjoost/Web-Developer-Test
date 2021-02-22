@@ -97,10 +97,10 @@ module dynamo_db_product {
 }
 
 module api_gateway {
-  source         = "./modules/api_gateway"
-  api_name = "${var.application_tag}-${var.environment}"
-  lambda_invoke_arn = module.api_lambda.invoke_arn
-  lambda_function_name  = module.api_lambda.function_name
+  source               = "./modules/api_gateway"
+  api_name             = "${var.application_tag}-${var.environment}"
+  lambda_invoke_arn    = module.api_lambda.invoke_arn
+  lambda_function_name = module.api_lambda.function_name
 
   application_name = var.application_name
   environment      = var.environment
