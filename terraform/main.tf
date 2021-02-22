@@ -74,9 +74,33 @@ module "s3" {
 
 }
 
-module dynamo_db {
+module dynamo_db_persistence {
   source         = "./modules/dynamo"
+  dynamo_db_name = "${var.application_tag}-${var.environment}-persistence"
+
+  application_name = var.application_name
+  environment      = var.environment
+  application_tag  = var.application_tag
+  repo_tag         = var.repo_tag
+  creator_tag      = var.creator_tag
+}
+
+module dynamo_db_product {
+  source         = "./modules/dynamo_inventory"
   dynamo_db_name = "${var.application_tag}-${var.environment}-inventory"
+
+  application_name = var.application_name
+  environment      = var.environment
+  application_tag  = var.application_tag
+  repo_tag         = var.repo_tag
+  creator_tag      = var.creator_tag
+}
+
+module api_gateway {
+  source         = "./modules/api_gateway"
+  api_name = "${var.application_tag}-${var.environment}"
+  lambda_invoke_arn = module.api_lambda.invoke_arn
+  lambda_function_name  = module.api_lambda.function_name
 
   application_name = var.application_name
   environment      = var.environment
