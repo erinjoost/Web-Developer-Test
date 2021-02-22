@@ -16,11 +16,11 @@ class Footer extends Component {
         <div className="container">
             <NavBar id="bottom"/>
             <div id="info" className="container">
-                <div className="container">
-                    <a href="google.com"><img src={google} alt="google"/></a>
-                    <a href="facebook.com"><img src={facebook} alt="facebook"/></a>
-                    <a href="instagram.com"><img src={instagram} alt="instagram"/></a>
-                    <a href="twitter.com"><img src={twitter} alt="twitter"/></a>
+                <div className="social container">
+                    <a href="https://google.com"><img src={google} alt="google"/></a>
+                    <a href="https://facebook.com"><img src={facebook} alt="facebook"/></a>
+                    <a href="https://instagram.com"><img src={instagram} alt="instagram"/></a>
+                    <a href="https://twitter.com"><img src={twitter} alt="twitter"/></a>
                 </div>
                 
                     <p>Privacy Policy<br/>
