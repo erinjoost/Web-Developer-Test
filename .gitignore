@@ -63,3 +63,4 @@ typings/
 .terraform/
 .tfstate
 *.tfvars
+*.zip

@@ -1,5 +1,5 @@
 {
-  "name": "my-app",
+  "name": "erin-joost-web-developer-test",
   "version": "0.0.1",
   "description": "A sample application for demonstrating web development skills",
   "engines": {
@@ -8,9 +8,10 @@
   "main": "src/index.js",
   "scripts": {
     "watch": "npx webpack --watch",
-    "start": "npx webpack serve --open",
+    "dev": "npx webpack serve --open",
+    "start": "node ./server.js",
     "build": "npx webpack",
-    "test": "test"
+    "zip_lambda": "./scripts/zip_lambda.sh"
   },
   "repository": "git+https://github.com/erinjoost/Web-Developer-Test.git",
   "keywords": [
@@ -33,16 +34,24 @@
     "css-loader": "^5.0.2",
     "file-loader": "^6.2.0",
     "node-sass": "^4.14.1",
+    "sass": "^1.32.7",
+    "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
     "webpack": "^5.22.0",
     "webpack-cli": "^4.5.0",
-    "webpack-dev-server": "^3.11.2"
-  },
-  "dependencies": {
+    "html-webpack-plugin": "^5.2.0",
+    "webpack-dev-server": "^3.11.2",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-hot-loader": "^4.13.0",
     "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "url-loader": "^4.1.1",
+    "express": "^4.17.1"
+
+  },
+  "dependencies": {
+    "aws-sdk": "^2.848.0",
+    "uuid": "^8.3.2"
   }
 }

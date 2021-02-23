@@ -1,4 +1,4 @@
-resource "aws_apigatewayv2_api" "main_api" {
+resource aws_apigatewayv2_api main_api {
   name          = var.api_name
   protocol_type = "HTTP"
   cors_configuration {
@@ -15,14 +15,7 @@ resource "aws_apigatewayv2_api" "main_api" {
   }
 }
 
-resource "aws_apigatewayv2_route" "results_route" {
-  route_key = "*"
-  api_id    = aws_apigatewayv2_api.main_api.id
-  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
-}
-
-
-resource "aws_apigatewayv2_integration" "lambda_integration" {
+resource aws_apigatewayv2_integration lambda_integration {
   api_id                 = aws_apigatewayv2_api.main_api.id
   integration_type       = "AWS_PROXY"
   integration_method     = "POST"
@@ -30,30 +23,43 @@ resource "aws_apigatewayv2_integration" "lambda_integration" {
   payload_format_version = "2.0"
 }
 
+resource aws_apigatewayv2_route default_route {
+  route_key = "$default"
+  api_id    = aws_apigatewayv2_api.main_api.id
+  target    = "integrations/${aws_apigatewayv2_integration.lambda_integration.id}"
+}
 
-resource "aws_apigatewayv2_stage" "default_stage" {
+resource aws_apigatewayv2_stage default_stage {
   api_id      = aws_apigatewayv2_api.main_api.id
-  name        = var.api_stage_name
+  name        = var.environment
   auto_deploy = true
 }
 
 
-resource "aws_apigatewayv2_deployment" "deployment" {
+resource aws_apigatewayv2_deployment deployment {
   api_id = aws_apigatewayv2_api.main_api.id
+
+  triggers = {
+    redeployment = sha1(join(",", list(
+      jsonencode(aws_apigatewayv2_integration.lambda_integration),
+      jsonencode(aws_apigatewayv2_route.default_route),
+    )))
+  }
+
   lifecycle {
     create_before_destroy = true
   }
 }
 
-resource "aws_lambda_permission" "allow_api_gateway_invocation" {
+resource aws_lambda_permission allow_api_gateway_invocation {
   statement_id  = "AllowExecutionFromAPIGateway"
   action        = "lambda:InvokeFunction"
   function_name = var.lambda_function_name
   principal     = "apigateway.amazonaws.com"
-  source_arn    = "${aws_apigatewayv2_api.main_api.execution_arn}/*/*/*"
+  source_arn    = "${aws_apigatewayv2_api.main_api.execution_arn}/*/*"
 }
 
-resource "aws_apigatewayv2_domain_name" "api_gw_domain_name" {
+/*resource aws_apigatewayv2_domain_name api_gw_domain_name {
   domain_name = var.api_gw_alias
 
   domain_name_configuration {
@@ -61,4 +67,4 @@ resource "aws_apigatewayv2_domain_name" "api_gw_domain_name" {
     endpoint_type   = "REGIONAL"
     security_policy = "TLS_1_2"
   }
-}
+}*/

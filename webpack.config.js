@@ -1,16 +1,20 @@
 const path = require("path");
 const webpack = require("webpack");
-const CopyPlugin = require("copy-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
     entry: ["./src/index.js"],
-    //template: require('./src/pages/index.html'),
     mode: "development",
     module: {
         rules: [{
                 test: /\.(png|jpe?g|gif)$/i,
                 use: [{
                     loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'assets/',
+                        publicPath: 'assets/'
+                      }
                 }, ],
             }, {
                 test: /\.(js|jsx)$/,
@@ -21,26 +25,33 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"]
-            }       
+                test: /\.s[ac]ss$/i,
+                use: [
+                    "style-loader",
+                    "css-loader",
+                    "sass-loader",
+                ],
+            },
         ],
     },
     resolve: {
         extensions: ["*", ".js", ".jsx"]
     },
     output: {
-        path: path.resolve(__dirname, "dist/"),
-        publicPath: "/dist/",
+        path: path.resolve(__dirname, "public/"),
+        publicPath: "/public/",
         filename: "bundle.js"
     },
     devServer: {
         historyApiFallback: true,
         contentBase: path.join(__dirname, "public/"),
         port: 3000,
-        hotOnly: true
+        hot: true
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, "src", "pages/index.html")
+          })
     ]
 };
