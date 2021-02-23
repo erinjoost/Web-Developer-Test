@@ -2,9 +2,9 @@ const AWS = require("aws-sdk");
 AWS.config.update({region: 'us-east-1'});
 var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 var params = {
-    TableName: 'CUSTOMER_LIST',
+    TableName: PROCESS.ENV.DYNAMO_INVENTORY,
     Item: {
-      'CUSTOMER_ID' : {N: '001'},
+      'GUID' : {N: '001'},
       'CUSTOMER_NAME' : {S: 'Richard Roe'}
     }
   };
@@ -12,17 +12,26 @@ var params = {
 exports.handler = async function(event, context) {
     const body = JSON.parse(event.body);
     const guid = body.guid;
+    const cart = body.cart;
+
+    var params = {
+        TableName: PROCESS.ENV.DYNAMO_INVENTORY,
+        Item: {
+          'GUID' : {N: guid},
+          'Cart' : {M: JSON.stringify(cart)}
+        }
+      };
+   
     
     const method = event.requestContext.http.method;
     const path = event["routeKey"]
-    console.log("hi from lambda")
     switch(path){
         case "GET /product":
-          // code block
+        
           break;
         case "GET /products":
-          // code block
-          break;
+
+        break;
         default:
           // code block
       }

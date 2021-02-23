@@ -85,7 +85,7 @@ module dynamo_db_persistence {
   creator_tag      = var.creator_tag
 }
 
-module dynamo_db_product {
+module dynamo_db_inventory {
   source         = "./modules/dynamo_inventory"
   dynamo_db_name = "${var.application_tag}-${var.environment}-inventory"
 
