@@ -7,7 +7,7 @@ resource aws_dynamodb_table dynamo_db {
 
   attribute {
     name = "guid"
-    type = "S"
+    type = "N"
   }
 
   tags = {
